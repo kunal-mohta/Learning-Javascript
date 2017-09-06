@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		
+	</style>
+</head>
+<body style = "margin: 0 0 0 0">
+	<script type="text/javascript">
+		alert(+""); //unary operator example
+
+		alert(2**8); //exponent
+
+	{
+		let x = (false) ? 2 : (false) ? 2 : 3;
+		alert(x);
+	}//multiple ternary operator
+
+	alert(!!1);//conversion to boolean
+
+	{	
+		let a = false, b = true;
+		let x = a || b;
+		alert(x);
+	}//logical operators for variables
+
+	{
+		function f(a,b=3){
+			alert(b);
+		}
+		f();
+	}//default value of a paramete when not defined while calling
+
+	{
+		let f = (function(){
+			alert("function expression");
+		})();
+	}//function expression : alternate way to declare functions
+
+	{
+		let f;
+		{
+			f = function(){alert("function outside code block")};//it is important to use function expression here
+		}
+		f();
+	}//using a function outside the code block
+
+	{
+		let obj = {
+			name:"kunal",
+			age:18,
+		};
+		delete obj.name;
+		alert(obj.name);
+	}//deleting object properties
+
+	{
+		let x = "try";
+		let obj = {
+			["try"+"Shit"] : "kunal",//computational use
+			[x]:18,//variable use
+		}
+		alert(obj.tryShit);
+		alert(obj.try);
+	}//square brackets use for keys of objects; computational and variable use
+
+	{
+		let obj = {
+			name:"kunal",
+			age:18,
+		};
+
+		let clone = Object.assign(obj, {});
+		alert(clone.name);
+	}//cloning objects; note that if the keys are objects themselves then this method will not create clones of the object used as value for that key and to overcome this we need to use "deep cloning"
+
+	{
+		function f(){
+			alert(new.target);
+		}
+		new f();
+	}//letting you know if the function was created usin g new constructor or not
+
+	{
+		let x = 1.123456;
+		alert(x.toFixed(3));
+	}//value of variable to a fixed number of decimal places
+
+	{
+		let x = -1.234;
+		alert(Math.trunc(x));
+	}//remove the decimal part of the variable no matter positive or negative
+
+	{
+		alert(NaN === NaN);
+		alert(Object.is(NaN,NaN));
+	}//in built reliable method used for comparison
+
+	{
+		let x = 148;
+		alert(x.toString(16) + "  " + parseInt(94,16));
+	}//toString is used to convert decimal to any other base number and parseInt is used for vice versa
+
+	{
+		let str = "string";
+		alert(str.split(""));
+	}//method to convert string directly to an array
+
+	
+
+	</script>
+			
+</body>
+</html>
