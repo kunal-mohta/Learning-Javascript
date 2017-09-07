@@ -8,7 +8,7 @@
 </head>
 <body style = "margin: 0 0 0 0">
 	<script type="text/javascript">
-		alert(+""); //unary operator example
+		/*alert(+""); //unary operator example
 
 		alert(2**8); //exponent
 
@@ -106,8 +106,53 @@
 		let str = "string";
 		alert(str.split(""));
 	}//method to convert string directly to an array
-
 	
+
+	{
+		let arr = [1,2,3];
+		arr.splice(0,2,"kunal");
+		alert(arr);
+	}//Array.splice can be used to remove as well as add elements
+	
+
+	{
+		let arr = [1,2,3,4];
+		x = arr.slice(0,2);
+		alert(x);
+	}//creating subarrays 
+	
+	{
+		let arr = [
+			{id:1, value:"one"},
+			{id:2, value:"two"},
+			{id:3, value:"three"},
+		];
+
+		let element = arr.find(item => item.id == 2);//the item of the array is itself returned in .find method
+		alert(element.value);
+
+		let element_index = arr.findIndex(item => item.id == 2);// the index of the array item is returned in .findIndex method
+		alert(element_index);
+
+		let element_array = arr.filter(item => item.id < 3);// an array of elements of the main array that satisfy the given condition are returned
+		alert(element_array[0].id);
+
+		// note that in all this methods there is an additional argument after the funciton where you can specify the object for which this has been used in the previous argument function
+
+		let arr2 = [1,2,3,4];
+
+		let result = arr2.reduce((sum,current)=>sum*current);// making use of the previously returned value; like here we have used this to obtain factorial of a number so easily
+		alert(result);
+	}
+
+	{
+		let str = "hello";
+		alert(Array.from(str));
+	}//alternate method to convert string to array directly
+	*/
+	{
+		
+	}
 
 	</script>
 			
