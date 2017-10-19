@@ -3,10 +3,54 @@
 <head>
 	<title></title>
 	<style type="text/css">
-		
+		#testSubject{
+			height:100px;
+			width:100px;
+			background: red;
+			padding:10px;
+			position:absolute;
+			margin:5px;
+			border-top: solid 5px black;
+			border-left: solid 10px black;
+			overflow: scroll;
+		}
 	</style>
 </head>
 <body style = "margin: 0 0 0 0">
+	<div id = "testSubject">
+		Random<br>
+		Random<br>
+		Random<br>
+		Random<br>
+		Random<br>
+		Random<br>
+		Random<br>
+		Random<br>
+		Random<br>
+		Random<br>
+		Random<br>
+		Random<br>
+	</div>
+		Random<br><br><br>
+		Random<br><br><br>
+		Random<br><br><br>
+		Random<br><br><br>
+		Random<br><br><br>
+		Random<br><br><br>
+		Random<br><br><br>
+		Random<br><br><br>
+		Random<br><br><br>
+		Random<br><br><br>
+		Random<br><br><br>
+		Random<br><br><br>
+		Random<br><br><br>
+		Random<br><br><br>
+		Random<br><br><br>
+		Random<br><br><br>
+		Random<br><br><br>
+		Random<br><br><br>
+		Random<br><br><br>
+
 	<script type="text/javascript">
 		/*alert(+""); //unary operator example
 
@@ -149,10 +193,63 @@
 		let str = "hello";
 		alert(Array.from(str));
 	}//alternate method to convert string to array directly
-	*/
+
 	{
-		
+		console.log("offsetTop:"+testSubject.offsetTop);//distance from top to the beginning of the padding
+		console.log("offsetLeft:"+testSubject.offsetLeft);//distance from left to the beginning of the padding
+		console.log("offsetWidth:"+testSubject.offsetWidth);//total width including padding and border
+		console.log("offsetHeight:"+testSubject.offsetHeight);//total height including padding and border
+		console.log("clientTop:"+testSubject.clientTop);//distance from the top-border start to the beginning of the padding 
+		console.log("clientLeft:"+testSubject.clientLeft);//distance from the left-border start to the beginning of the padding
+		console.log("clientWidth:"+testSubject.clientWidth);//width including padding
+		console.log("clientHeight:"+testSubject.clientHeight);//height including padding 
+		console.log("scrollWidth:"+testSubject.scrollWidth);//total scrollable width	
+		console.log("scrollHeight:"+testSubject.scrollHeight);//total scrollable height
+		setTimeout(function(){
+			console.log("scrollLeft:"+testSubject.scrollLeft);//amount scrolled horizontal in div
+			console.log("scrollTop:"+testSubject.scrollTop);//amount scrolled vertical in div
+		},2000);//timeout to allow user to scroll
+	}//element size and scrolling
+
+	{
+		console.log("window.innerWidth:"+window.innerWidth);//complete width including scrollbars
+		console.log("document.documentElement.clientWidth:"+document.documentElement.clientWidth);//complete width excluding scrollbars
+
+		let scrollHeight = Math.max(
+  			document.body.scrollHeight, document.documentElement.scrollHeight,
+  			document.body.offsetHeight, document.documentElement.offsetHeight,
+  			document.body.clientHeight, document.documentElement.clientHeight
+		);//consider the max value among all these
+		console.log("document height:"+scrollHeight);//height of the document
+
+		setTimeout(function(){
+			console.log("pageXOffset:"+window.pageXOffset);//amount scrolled horizontal
+			console.log("pageYOffset:"+window.pageYOffset);//amount scrolled vertical
+		},2000);//timeout to allow user to scroll
+
+		//for scrolling of elements we can use scrollLeft, scrollTop; but for the window these cause inter-browser problems so we can use:-
+		//window.scrollBy(x,y)
+		//window.scrollTo(x,y)
+
+		//elem.scrollIntoView(boolean)  - use this to scroll till a particular elem
+	}//window sizing and scrolling
+
+	{
+		var x = document.elementFromPoint(50,50);
+		x.style.background = 'blue';
+
+		console.log(x.getBoundingClientRect().left);//returns relative to the viewport no matter the scroll
+
+		//note there is no direct way to get the coordinates relative to the document so we use:-
+		//x.top = x.getBoundingClientRect().top + window.pageYOffset
 	}
+
+	{
+		document.body.addEventListener("click", function(){alert("hello")});
+		
+		testSubject.addEventListener("click", function(){event.stopPropagation();});
+	}//events
+	*/
 
 	</script>
 			
