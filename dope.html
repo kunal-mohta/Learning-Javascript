@@ -32,6 +32,25 @@
 		Random<br>
 		<div style = "height:100px; width: 100px; background: blue;"></div>
 	</div>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<form name = "userform">
+		one<input type = "radio" name = "radiobtn"><br>
+		two<input type = "radio" name = "radiobtn"><br>
+
+		<fieldset name = "userfield">
+			<legend>Fieldset</legend>
+			<input type = "text" size = "10" id = "fieldinput">
+		</fieldset>
+
+		<select name = "dropdown" multiple>
+			<option>one</option>
+			<option>two</option>
+			<option>three</option>
+			<option>four</option>
+		</select>
+	</form>
+
+
 		Random<br><br><br>
 		Random<br><br><br>
 		Random<br><br><br>
@@ -299,7 +318,6 @@
 			console.log(event.keyCode);
 		});
 	}
-	*/
 
 	{	
 		console.log(document.readyState);
@@ -310,7 +328,41 @@
 		document.addEventListener("readystatechange", function(){console.log(document.readyState);});
 	}	
 
+	{
+		console.log(document.forms[0]);
+		console.log(document.forms.userform.radiobtn);
+		console.log(document.forms.userform.elements);
+
+		console.log(document.forms.userform.userfield.elements[0]);
+
+		console.log(document.getElementById("fieldinput").form);
+
+		document.forms[0].radiobtn[0].checked = true;
+		console.log(document.forms.userform.elements[0].checked);
+
+		document.forms.userform.dropdown.selectedIndex = 2;
+		console.log(document.forms.userform.dropdown.options);
+		console.log(document.forms.userform.dropdown.value);
+		console.log(document.forms.userform.dropdown.selectedIndex);
+
+		var newOption = new Option("text", "value","true","true");//true for default selection
+		document.forms.userform.dropdown.appendChild(newOption);
+
+		document.forms.userform.fieldinput.focus();
+
+		document.forms.userform.fieldinput.addEventListener("input", function(){
+			console.log(this.value);
+		});//use this instead of keydown in case of forms because all kinds of inputs are accepted here (copy paste etc)
+
+		document.forms.userform.submit();
+	}//forms 
+	*/
+
+	{
+		
+	}
+
 	</script>
-			
+
 </body>
 </html>
