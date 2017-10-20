@@ -248,8 +248,15 @@
 		document.body.addEventListener("click", function(){alert("hello")});
 		
 		testSubject.addEventListener("click", function(){event.stopPropagation();});
-	}//events
+	}//events(bubbling and capturing)
 	*/
+
+	{
+		testSubject.onclick = function(){alert("hello");}
+		var event = new Event("click");
+		testSubject.dispatchEvent(event);
+		console.log(event.isTrusted);
+	}
 
 	</script>
 			
