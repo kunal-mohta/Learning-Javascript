@@ -4,8 +4,8 @@
 	<title></title>
 	<style type="text/css">
 		#testSubject{
-			height:100px;
-			width:100px;
+			height:200px;
+			width:200px;
 			background: red;
 			padding:10px;
 			position:absolute;
@@ -16,7 +16,7 @@
 		}
 	</style>
 </head>
-<body style = "margin: 0 0 0 0">
+<body style = "margin: 0 0 0 0" >
 	<div id = "testSubject">
 		Random<br>
 		Random<br>
@@ -30,6 +30,7 @@
 		Random<br>
 		Random<br>
 		Random<br>
+		<div style = "height:100px; width: 100px; background: blue;"></div>
 	</div>
 		Random<br><br><br>
 		Random<br><br><br>
@@ -249,14 +250,65 @@
 		
 		testSubject.addEventListener("click", function(){event.stopPropagation();});
 	}//events(bubbling and capturing)
-	*/
 
 	{
 		testSubject.onclick = function(){alert("hello");}
 		var event = new Event("click");
 		testSubject.dispatchEvent(event);
 		console.log(event.isTrusted);
+	}//custom events
+
+	{
+		document.body.addEventListener("mousedown", function(event){
+			console.log(event.which);//which click was performed
+			console.log("clientY:"+event.clientY);
+			console.log("pageY:"+event.pageY);
+			event.preventDefault();//does not allow to select text when double clicked
+		});
+
+		document.body.addEventListener("dblclick", function(){console.log("double");});
+		
+		document.body.addEventListener("click", function(){
+			if(event.altKey && (event.ctrlKey || event.metaKey) && event.shiftKey){console.log("alt+ctrl+shift");}
+			
+			else if(event.altKey && event.shiftKey){console.log("alt+shift");}	
+
+			else if(event.altKey && (event.ctrlKey || event.metaKey)){console.log("alt+ctrl");}
+		});//click + keys
+	}//basic mouse events
+
+	{
+		testSubject.addEventListener("mouseover", function(){
+			console.log(event.relatedTarget);
+		});//returns from where mouse came into thee testSubject
+
+		testSubject.addEventListener("mouseenter", function(){
+			console.log(event.relatedTarget);
+		});//same function as above using mouseenter instead of mouseenter, see difference by commenting the above code
 	}
+
+	{
+		document.body.addEventListener("keydown", function(){
+			console.log(event.code);
+			console.log(event.key);
+			if(event.code == "F1"){
+				event.preventDefault();
+			}
+			event.repeat = false;
+
+			console.log(event.keyCode);
+		});
+	}
+	*/
+
+	{	
+		console.log(document.readyState);
+		window.onload = function(){alert("load");}
+		window.onunload = function(){alert("unload");}//not working
+		window.onbeforeunload = function(){alert("beforeunload");}//not working
+
+		document.addEventListener("readystatechange", function(){console.log(document.readyState);});
+	}	
 
 	</script>
 			
