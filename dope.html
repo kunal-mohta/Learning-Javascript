@@ -49,7 +49,7 @@
 			<option>four</option>
 		</select>
 	</form>
-
+	<iframe id = "iframe" src = "https://javascript.info/cross-window-communication" sandbox = "allow-same-origin allow-scripts"></iframe>
 
 		Random<br><br><br>
 		Random<br><br><br>
@@ -356,11 +356,174 @@
 
 		document.forms.userform.submit();
 	}//forms 
-	*/
 
 	{
-		
+		var start = performance.now();
+		var t;
+		requestAnimationFrame(function animate(time){
+			t = time - start;
+			console.log(t);
+			requestAnimationFrame(animate);
+		});
+	}//use this for javascript animations
+	//you can make the animation on any curve x(t)
+	//awesome
+
+	{
+		var newWindow = window.open('file:///C:/Users/kunal/Desktop/tp.html');
+		newWindow.alert("hello");
+		newWindow.close();
+		console.log(newWindow.closed);	
+		console.log(window == top);
 	}
+
+	
+	{
+		iframe.onload = function(){
+			var iframeWindow = iframe.contentWindow;
+
+			try{
+				var iframedoc = iframe.contentDocument;
+			}
+			catch(e){
+				alert(e);
+			}
+			try{
+				alert(iframeWindow.location);
+			}
+			catch(e){
+				alert(e);
+			}
+
+			iframeWindow.location = "file:///C:/Users/kunal/Desktop/Learning-Javascript/dope.html";
+
+			iframe.onload = null;
+
+			console.log(iframe.contentWindow == frames[0] && iframe.contentWindow == window.frames[0]);
+
+			console.log(window.frames[0].parent == window);
+
+			console.log(window == window.top);//first time true because it is the output of the outside window and second time false because it is the output from the frame
+			
+			//see the sandbox attr in frame above
+
+
+			window.postMessage("oolalalalalalal", "*");
+			window.addEventListener("message", function(){
+				alert(event.data);
+				alert(event.source);
+				alert(event.origin);
+			});
+
+
+			window.frames[0].contentWindow.postMessage("oolalal", "*");
+
+			window.frames[0].contentWindow.addEventListener("message", function(){
+				alert(event.data);
+			});//this won't work because it doesn't have the same origin
+
+		}
+	}//cross window communication
+
+	{
+		try{
+			la;
+		}
+		catch(err){
+			console.log(err);
+			console.log(err.name);
+			console.log(err.message);
+			console.log(err.stack);
+		}
+
+		var json = "poor json";
+
+		try{
+			var user = JSON.parse(json);
+			alert(user);
+		}
+		catch(e){
+			alert("error in JSON");
+		}//this is useful when user entered data wrong in json, hence this prevents the script from dying
+
+		alert("script still works");
+
+		var json2 = '{"age":18}';
+
+		try{
+			var user2 = JSON.parse(json2);
+
+			if(!user2.name){
+				throw new SyntaxError("no name property");//throw allows you to throw your own errors
+			}
+			alert("user2.name");//this is not executed
+		}
+		catch(e){
+			alert(e.message);
+		}
+
+		alert("script continues");
+
+		try{
+			console.log("try");
+		}
+		catch(e){
+			console.log("catch");
+		}
+		finally{
+			console.log("finally");
+		}
+
+		window.onerror = function(message, url, line, col, error){
+		 	alert(message+" "+url+" "+line+" "+col+" "+error);
+		};//global errors
+
+		try{
+			var u = JSON.parse(json);
+			console.log(u);
+		}
+		finally{
+			console.log("hello");
+		}
+
+		alert("script works");
+	}//errors
+
+	{
+		class myError extends Error{
+			constructor(message){
+				super(message);
+				this.name = "myError";
+			}
+		}
+
+		class myDeeperError extends myError{
+			constructor(message){
+				super(message);
+				this.name = this.constructor.name;//removes the burden to specify name repeatedely
+			}
+		}
+
+
+		try{
+			throw new myError("this is my custom error");
+		}
+		catch(e){
+			console.log(e.message);
+			console.log(e.name);
+			console.log(e instanceof Error);
+			console.log(e instanceof SyntaxError);//used to check for specific types of error
+		}
+
+		try{
+			throw new myDeeperError("this is my deeper error");
+		}
+		catch(e){
+			console.log(e.message);
+			console.log(e.name);
+		}
+	}
+	*/
 
 	</script>
 
